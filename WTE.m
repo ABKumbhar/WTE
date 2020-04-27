@@ -54,7 +54,7 @@ xdAD = TOC/TAD
 if ( xdAD <= (0.4))
     WAD=0;
 else 
-    TAD = TOC/0.08
+    TAD = TOC/0.4
     WAD = TAD - TOC - TMSWm
     xdAD = TOC/TAD
 end
