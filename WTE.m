@@ -24,7 +24,7 @@ xI = 0.125;
 % Remaining is non biodegradable waste
 xNB = 1-xOC-xR-xI
 %M = moisture content average of summer and mansoon
-M = (0.5 + 0.65)/2;
+M = 0.7269;
 %C calorific value in kCal/kg
 C = 1000;
 
@@ -44,15 +44,14 @@ L = TMSWd*xI + TMSWd*xNB;
 %But we need to check the dry content in TAD if it is more than 8% we need
 %to add water
 % xdAD = fraction of dry content in anaerobic digestor
-% WAD = additional water need to be added if the solid content is not in
-% the range of 25%-40%
+% WAD = additional water need to be added if the solid content is not less than 40%
 WAD = 0;
 TAD = TOC + TMSWm + WAD ;
 
 xdAD = TOC/TAD
 
 % Check the dry content range
-if (xdAD >= (0.25)  || xdAD <= (0.4))
+if ( xdAD <= (0.4))
     WAD=0;
 else 
     TAD = TOC/0.08
@@ -62,7 +61,28 @@ end
 
 %% Energy Balance
 % For methane production
+% VS is volatile solid content (data taken from an average MSW facility, not
+% actual deonar)
+% C carbon percentage/fraction at Deonar
+% HRT hydraulic rentention time = 10 to 15 days = avg 12.5 days
 
+%Rate constant for methane formation is 0.12 h^(-1)
+% Determination of Methane and Carbon Dioxide Formation Rate Constants for Semi-Continuously Fed Anaerobic Digesters
+%Jan Moestedt 1,2,†, Jonas Malmborg 1,†,‡ and Erik Nordell 1,†,*
+
+% y = Methane yield is about 221 mlCH4/gVS of VS (need to convert to
+% dimensionaless variable
+
+HRT = 12.5
+k = 0.12*24
+xVS = 0.394
+xC = 0.4458
+yCH4_maxinlab = 221
+yCH4_maxindigestor = HRT*k*(yCH4_maxinlab)/(HRT*k + 1)
+% TCH4 methane (in m^3) produced per day
+TCH4_m3perday = yCH4_maxindigestor*xVS*TAD
+
+% Assume that all volatiles
 
 
 
