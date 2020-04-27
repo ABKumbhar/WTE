@@ -21,7 +21,9 @@ TMSW = 4700;
 xOF = 0.5;
 xR = 0.186;
 xI = 0.125;
+
 % Remaining is non biodegradable waste
+xNB = 1-xOF-xR-xI
 %M = moisture content average of summer and mansoon
 M = (0.5 + 0.65)/2;
 % TMSWd = waste on dry basis
@@ -33,4 +35,8 @@ C = 1000;
 TOF = TMSWd*xOF;
 TR = TMSWd*xR;
 TI = xI*TMSWd;
+% TR is send to another separation plant and we will not consider here
+% TI is send to landfill
+% Let L indicates landfill amount
+L = TMSWd*xI + TMSWd*xNB;
 
