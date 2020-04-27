@@ -6,10 +6,9 @@
 %% Defining variables
 % Subscripts :  
 %AD indicates anarobic digestion
-% T is non recylable waste
 % R is recyclable
 % MSW = municipal solid waste
-% OF organic fraction
+% OC organic content
 % I is inerts
 
 % Variable x indiactes fraction on dry basis
@@ -18,12 +17,12 @@
 
 TMSW = 4700;
 
-xOF = 0.5;
+xOC = 0.5;
 xR = 0.186;
 xI = 0.125;
 
 % Remaining is non biodegradable waste
-xNB = 1-xOF-xR-xI
+xNB = 1-xOC-xR-xI
 %M = moisture content average of summer and mansoon
 M = (0.5 + 0.65)/2;
 %C calorific value in kCal/kg
@@ -34,7 +33,7 @@ C = 1000;
 TMSWd = 4700*(1-M); 
 %TMSWm = total water content
 TMSWm = TMSW - TMSWd
-TOF = TMSWd*xOF;
+TOC = TMSWd*xOC;
 TR = TMSWd*xR;
 TI = xI*TMSWd;
 % TR is send to another separation plant and we will not consider here
@@ -48,17 +47,17 @@ L = TMSWd*xI + TMSWd*xNB;
 % WAD = additional water need to be added if the solid content is not in
 % the range of 25%-40%
 WAD = 0;
-TAD = TOF + TMSWm + WAD ;
+TAD = TOC + TMSWm + WAD ;
 
-xdAD = TOF/TAD
+xdAD = TOC/TAD
 
 % Check the dry content range
 if (xdAD >= (0.25)  || xdAD <= (0.4))
     WAD=0;
 else 
-    TAD = TOF/0.08
-    WAD = TAD - TOF - TMSWm
-    xdAD = TOF/TAD
+    TAD = TOC/0.08
+    WAD = TAD - TOC - TMSWm
+    xdAD = TOC/TAD
 end
 
 %% Energy Balance

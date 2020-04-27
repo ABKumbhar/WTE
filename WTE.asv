@@ -6,7 +6,6 @@
 %% Defining variables
 % Subscripts :  
 %AD indicates anarobic digestion
-% T is non recylable waste
 % R is recyclable
 % MSW = municipal solid waste
 % OF organic fraction
@@ -45,19 +44,26 @@ L = TMSWd*xI + TMSWd*xNB;
 %But we need to check the dry content in TAD if it is more than 8% we need
 %to add water
 % xdAD = fraction of dry content in anaerobic digestor
-% WAD = additional water need to be added if the moisture content is less
-% than 8%
+% WAD = additional water need to be added if the solid content is not in
+% the range of 25%-40%
 WAD = 0;
 TAD = TOF + TMSWm + WAD ;
 
 xdAD = TOF/TAD
 
-if xdAD < (0.08)
+% Check the dry content range
+if (xdAD >= (0.25)  || xdAD <= (0.4))
     WAD=0;
 else 
     TAD = TOF/0.08
-    WAD = 
-% Check if fraction of dry content is less than 
+    WAD = TAD - TOF - TMSWm
+    xdAD = TOF/TAD
+end
+
+%% Energy Balance
+% For methane production
+
+
 
 
 
